@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/error/failures.dart';
 import '../../../../../../core/strings/failures.dart';
@@ -18,33 +18,32 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       if (event is GetNewsEvent) {
         emit(LoadingNewsState());
         final failureOrNews = await getNews();
-        emit(_mapFailureOrNewsToState(failureOrNews));
+        emit(mapFailureOrNewsToState(failureOrNews));
       } else if (event is RefreshNewsEvent) {
         emit(LoadingNewsState());
         final failureOrNews = await getNews();
-        emit(_mapFailureOrNewsToState(failureOrNews));
+        emit(mapFailureOrNewsToState(failureOrNews));
       }
     });
   }
 }
 
-NewsState _mapFailureOrNewsToState(Either<Failure, News> either) {
-  return either
-      .fold((failure) => ErrorNewsState(message: _mapFailureToMessage(failure)),
-          (news) {
-    return LoadedNewsState(news: news);
-  });
+NewsState mapFailureOrNewsToState(Either<Failure, News> either) {
+  return either.fold(
+    (failure) => mapFailureToState(failure),
+    (news) => LoadedNewsState(news: news),
+  );
 }
 
-String _mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return SERVER_FAILURE_MESSAGE;
-    case EmptyCacheFailure:
-      return EMPTY_CACHE_FAILURE_MESSAGE;
-    case OfflineFailure:
-      return OFFLINE_FAILURE_MESSAGE;
-    default:
-      return "Unexpected Error, Please try again later.";
+NewsState mapFailureToState(Failure failure) {
+  if (failure is ServerFailure) {
+    return const ErrorNewsState(message: serverFailureMessage);
+  } else if (failure is EmptyCacheFailure) {
+    return const ErrorNewsState(message: emptyCacheFailureMessage);
+  } else if (failure is OfflineFailure) {
+    return const ErrorNewsState(message: offlineFailureMessage);
+  } else {
+    return const ErrorNewsState(
+        message: 'Unexpected Error, Please try again later.');
   }
 }

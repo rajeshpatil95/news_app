@@ -10,10 +10,10 @@ class NewsListWidget extends StatelessWidget {
   final TransitionType transitionType;
 
   const NewsListWidget({
-    Key? key,
+    super.key,
     required this.news,
     required this.transitionType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class NewsListWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CachedNetworkImage(
-                      imageUrl: "${news.articles[index].urlToImage}" ?? "",
+                      imageUrl: "${news.articles[index].urlToImage}",
                       placeholder: (context, url) => Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),

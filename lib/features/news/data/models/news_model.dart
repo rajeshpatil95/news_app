@@ -1,19 +1,11 @@
 import '../../domain/entities/news.dart';
 
 class NewsModel extends News {
-  final String status;
-  final int totalResults;
-  final List<ArticleModel> articles;
-
   const NewsModel({
-    required this.status,
-    required this.totalResults,
-    required this.articles,
-  }) : super(
-          status: status,
-          totalResults: totalResults,
-          articles: articles,
-        );
+    required super.status,
+    required super.totalResults,
+    required List<ArticleModel> super.articles,
+  });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
@@ -36,34 +28,16 @@ class NewsModel extends News {
 }
 
 class ArticleModel extends Article {
-  final String? author;
-  final String title;
-  final String description;
-  final String url;
-  final String? urlToImage;
-  final String? publishedAt;
-  final String? content;
-  final SourceModel source;
-
   const ArticleModel({
-    required this.source,
-    this.author,
-    required this.title,
-    required this.description,
-    required this.url,
-    this.urlToImage,
-    this.publishedAt,
-    this.content,
-  }) : super(
-          source: source,
-          author: author,
-          title: title,
-          description: description,
-          url: url,
-          urlToImage: urlToImage,
-          publishedAt: publishedAt,
-          content: content,
-        );
+    required SourceModel super.source,
+    super.author,
+    required super.title,
+    required super.description,
+    required super.url,
+    super.urlToImage,
+    super.publishedAt,
+    super.content,
+  });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
@@ -78,6 +52,8 @@ class ArticleModel extends Article {
     );
   }
 
+  // Added missing toJson method
+  @override
   Map<String, dynamic> toJson() {
     return {
       'source': source.toJson(),
@@ -93,16 +69,10 @@ class ArticleModel extends Article {
 }
 
 class SourceModel extends Source {
-  final String? id;
-  final String name;
-
   const SourceModel({
-    this.id,
-    required this.name,
-  }) : super(
-          id: id,
-          name: name,
-        );
+    super.id,
+    required super.name,
+  });
 
   factory SourceModel.fromJson(Map<String, dynamic> json) {
     return SourceModel(
@@ -111,6 +81,7 @@ class SourceModel extends Source {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,

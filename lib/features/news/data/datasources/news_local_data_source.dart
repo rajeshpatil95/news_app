@@ -11,7 +11,7 @@ abstract class NewsLocalDataSource {
   Future<Unit> cacheNews(NewsModel newsModel);
 }
 
-const CACHED_NEWS = "CACHED_NEWS";
+const cachedNews = "cachedNews";
 
 class NewsLocalDataSourceImpl implements NewsLocalDataSource {
   final SharedPreferences sharedPreferences;
@@ -21,13 +21,13 @@ class NewsLocalDataSourceImpl implements NewsLocalDataSource {
   @override
   Future<Unit> cacheNews(NewsModel newsModel) {
     final newsModelToJson = newsModel.toJson();
-    sharedPreferences.setString(CACHED_NEWS, json.encode(newsModelToJson));
+    sharedPreferences.setString(cachedNews, json.encode(newsModelToJson));
     return Future.value(unit);
   }
 
   @override
   Future<NewsModel> getCachedNews() {
-    final jsonString = sharedPreferences.getString(CACHED_NEWS);
+    final jsonString = sharedPreferences.getString(cachedNews);
     if (jsonString != null) {
       final Map<String, dynamic> decodedJson =
           json.decode(jsonString) as Map<String, dynamic>;
