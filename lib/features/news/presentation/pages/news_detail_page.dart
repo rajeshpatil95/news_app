@@ -18,6 +18,8 @@ class NewsDetailPage extends StatelessWidget {
   AppBar _buildAppBar() => AppBar(
         title: const Text("News Detail"),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
+        iconTheme: const IconThemeData(
+            color: Colors.white),
       );
 
   Widget _buildBody() {
