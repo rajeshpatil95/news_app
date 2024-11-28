@@ -30,7 +30,7 @@ void main() {
 
       // Assert
       expect(result, isA<ErrorNewsState>());
-      expect((result as ErrorNewsState).message, SERVER_FAILURE_MESSAGE);
+      expect((result as ErrorNewsState).message, serverFailureMessage);
     });
 
     test('should return LoadedNewsState when news data is provided', () {
@@ -38,7 +38,7 @@ void main() {
       const testNews = News(status: "Ok", totalResults: 30, articles: []);
 
       // Act
-      final result = mapFailureOrNewsToState(Right(testNews));
+      final result = mapFailureOrNewsToState(const Right(testNews));
 
       // Assert
       expect(result, isA<LoadedNewsState>());

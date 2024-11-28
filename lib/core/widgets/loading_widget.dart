@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({Key? key}) : super(key: key);
+  const LoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
       child: Center(
         child: SizedBox(
           height: 30,

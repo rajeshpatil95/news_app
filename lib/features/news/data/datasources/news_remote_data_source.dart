@@ -8,7 +8,7 @@ abstract class NewsRemoteDataSource {
   Future<NewsModel> getNews();
 }
 
-const BASE_URL = "https://newsapi.org";
+const baseUrl = "https://newsapi.org";
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   final http.Client client;
@@ -18,8 +18,8 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   @override
   Future<NewsModel> getNews() async {
     final response = await client.get(
-      Uri.parse(BASE_URL +
-          "/v2/everything?q=bitcoin&apiKey=17d51eb402204967b27dabb543a51a76"),
+      Uri.parse(
+          "$baseUrl/v2/everything?q=bitcoin&apiKey=17d51eb402204967b27dabb543a51a76"),
       headers: {"Content-Type": "application/json"},
     );
 

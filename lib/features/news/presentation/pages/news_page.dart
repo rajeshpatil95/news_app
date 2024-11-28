@@ -60,21 +60,6 @@ class _NewsPageState extends State<NewsPage> with RouteAware {
     super.didPush();
   }
 
-  @override
-  void didPop() {
-    super.didPop();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-  }
-
-  @override
-  void didPushNext() {
-    super.didPushNext();
-  }
-
   Widget _buildBody() {
     return Padding(
       padding: const EdgeInsets.all(10),

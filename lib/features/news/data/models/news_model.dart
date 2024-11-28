@@ -1,8 +1,11 @@
 import '../../domain/entities/news.dart';
 
 class NewsModel extends News {
+  @override
   final String status;
+  @override
   final int totalResults;
+  @override
   final List<ArticleModel> articles;
 
   const NewsModel({

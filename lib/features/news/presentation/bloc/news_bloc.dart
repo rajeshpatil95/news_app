@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/error/failures.dart';
 import '../../../../../../core/strings/failures.dart';
@@ -39,11 +39,11 @@ NewsState mapFailureOrNewsToState(Either<Failure, News> either) {
 String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure:
-      return SERVER_FAILURE_MESSAGE;
+      return serverFailureMessage;
     case EmptyCacheFailure:
-      return EMPTY_CACHE_FAILURE_MESSAGE;
+      return emptyCacheFailureMessage;
     case OfflineFailure:
-      return OFFLINE_FAILURE_MESSAGE;
+      return offlineFailureMessage;
     default:
       return "Unexpected Error, Please try again later.";
   }
