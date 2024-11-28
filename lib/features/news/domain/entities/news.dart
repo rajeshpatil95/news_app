@@ -38,15 +38,29 @@ class Article extends Equatable {
 
   @override
   List<Object?> get props => [
-    source,
-    author,
-    title,
-    description,
-    url,
-    urlToImage,
-    publishedAt,
-    content
-  ];
+        source,
+        author,
+        title,
+        description,
+        url,
+        urlToImage,
+        publishedAt,
+        content
+      ];
+
+  // Added toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'source': source.toJson(),
+      'author': author,
+      'title': title,
+      'description': description,
+      'url': url,
+      'urlToImage': urlToImage,
+      'publishedAt': publishedAt,
+      'content': content,
+    };
+  }
 }
 
 class Source extends Equatable {
@@ -60,4 +74,11 @@ class Source extends Equatable {
 
   @override
   List<Object?> get props => [id, name];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
 }

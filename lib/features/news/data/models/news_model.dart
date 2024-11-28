@@ -1,22 +1,11 @@
 import '../../domain/entities/news.dart';
 
 class NewsModel extends News {
-  @override
-  final String status;
-  @override
-  final int totalResults;
-  @override
-  final List<ArticleModel> articles;
-
   const NewsModel({
-    required this.status,
-    required this.totalResults,
-    required this.articles,
-  }) : super(
-          status: status,
-          totalResults: totalResults,
-          articles: articles,
-        );
+    required super.status,
+    required super.totalResults,
+    required List<ArticleModel> super.articles,
+  });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
@@ -39,42 +28,16 @@ class NewsModel extends News {
 }
 
 class ArticleModel extends Article {
-  @override
-  final SourceModel source;
-  @override
-  final String? author;
-  @override
-  final String title;
-  @override
-  final String description;
-  @override
-  final String url;
-  @override
-  final String? urlToImage;
-  @override
-  final String? publishedAt;
-  @override
-  final String? content;
-
   const ArticleModel({
-    required this.source,
-    this.author,
-    required this.title,
-    required this.description,
-    required this.url,
-    this.urlToImage,
-    this.publishedAt,
-    this.content,
-  }) : super(
-          source: source,
-          author: author,
-          title: title,
-          description: description,
-          url: url,
-          urlToImage: urlToImage,
-          publishedAt: publishedAt,
-          content: content,
-        );
+    required SourceModel super.source,
+    super.author,
+    required super.title,
+    required super.description,
+    required super.url,
+    super.urlToImage,
+    super.publishedAt,
+    super.content,
+  });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
@@ -89,6 +52,8 @@ class ArticleModel extends Article {
     );
   }
 
+  // Added missing toJson method
+  @override
   Map<String, dynamic> toJson() {
     return {
       'source': source.toJson(),
@@ -104,18 +69,10 @@ class ArticleModel extends Article {
 }
 
 class SourceModel extends Source {
-  @override
-  final String? id;
-  @override
-  final String name;
-
   const SourceModel({
-    this.id,
-    required this.name,
-  }) : super(
-          id: id,
-          name: name,
-        );
+    super.id,
+    required super.name,
+  });
 
   factory SourceModel.fromJson(Map<String, dynamic> json) {
     return SourceModel(
@@ -124,6 +81,7 @@ class SourceModel extends Source {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,

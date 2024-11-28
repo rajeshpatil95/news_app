@@ -29,22 +29,21 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 }
 
 NewsState mapFailureOrNewsToState(Either<Failure, News> either) {
-  return either
-      .fold((failure) => ErrorNewsState(message: mapFailureToMessage(failure)),
-          (news) {
-    return LoadedNewsState(news: news);
-  });
+  return either.fold(
+    (failure) => mapFailureToState(failure),
+    (news) => LoadedNewsState(news: news),
+  );
 }
 
-String mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return serverFailureMessage;
-    case EmptyCacheFailure:
-      return emptyCacheFailureMessage;
-    case OfflineFailure:
-      return offlineFailureMessage;
-    default:
-      return "Unexpected Error, Please try again later.";
+NewsState mapFailureToState(Failure failure) {
+  if (failure is ServerFailure) {
+    return const ErrorNewsState(message: serverFailureMessage);
+  } else if (failure is EmptyCacheFailure) {
+    return const ErrorNewsState(message: emptyCacheFailureMessage);
+  } else if (failure is OfflineFailure) {
+    return const ErrorNewsState(message: offlineFailureMessage);
+  } else {
+    return const ErrorNewsState(
+        message: 'Unexpected Error, Please try again later.');
   }
 }
