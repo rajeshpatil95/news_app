@@ -18,25 +18,25 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       if (event is GetNewsEvent) {
         emit(LoadingNewsState());
         final failureOrNews = await getNews();
-        emit(_mapFailureOrNewsToState(failureOrNews));
+        emit(mapFailureOrNewsToState(failureOrNews));
       } else if (event is RefreshNewsEvent) {
         emit(LoadingNewsState());
         final failureOrNews = await getNews();
-        emit(_mapFailureOrNewsToState(failureOrNews));
+        emit(mapFailureOrNewsToState(failureOrNews));
       }
     });
   }
 }
 
-NewsState _mapFailureOrNewsToState(Either<Failure, News> either) {
+NewsState mapFailureOrNewsToState(Either<Failure, News> either) {
   return either
-      .fold((failure) => ErrorNewsState(message: _mapFailureToMessage(failure)),
+      .fold((failure) => ErrorNewsState(message: mapFailureToMessage(failure)),
           (news) {
     return LoadedNewsState(news: news);
   });
 }
 
-String _mapFailureToMessage(Failure failure) {
+String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure:
       return SERVER_FAILURE_MESSAGE;
