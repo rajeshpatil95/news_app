@@ -38,15 +38,15 @@ class Article extends Equatable {
 
   @override
   List<Object?> get props => [
-        source,
-        author,
-        title,
-        description,
-        url,
-        urlToImage,
-        publishedAt,
-        content
-      ];
+    source,
+    author,
+    title,
+    description,
+    url,
+    urlToImage,
+    publishedAt,
+    content
+  ];
 }
 
 class Source extends Equatable {

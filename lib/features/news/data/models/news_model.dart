@@ -39,14 +39,22 @@ class NewsModel extends News {
 }
 
 class ArticleModel extends Article {
-  final String? author;
-  final String title;
-  final String description;
-  final String url;
-  final String? urlToImage;
-  final String? publishedAt;
-  final String? content;
+  @override
   final SourceModel source;
+  @override
+  final String? author;
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  final String url;
+  @override
+  final String? urlToImage;
+  @override
+  final String? publishedAt;
+  @override
+  final String? content;
 
   const ArticleModel({
     required this.source,
@@ -96,7 +104,9 @@ class ArticleModel extends Article {
 }
 
 class SourceModel extends Source {
+  @override
   final String? id;
+  @override
   final String name;
 
   const SourceModel({
